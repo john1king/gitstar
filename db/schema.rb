@@ -14,11 +14,12 @@
 ActiveRecord::Schema.define(version: 20150207032810) do
 
   create_table "authorizations", force: :cascade do |t|
-    t.string   "provider",   limit: 255
-    t.string   "uid",        limit: 255
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "provider",     limit: 255
+    t.string   "uid",          limit: 255
+    t.string   "access_token", limit: 255
+    t.integer  "user_id",      limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "users", force: :cascade do |t|
