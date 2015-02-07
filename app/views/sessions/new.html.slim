@@ -1,0 +1,7 @@
+- flash.each do |name, msg|
+  div class=name = msg
+
+- if current_user
+  a href=logout_url data-method="delete" 退出
+- else
+  a href="/auth/github/" 使用 GitHub 登录
