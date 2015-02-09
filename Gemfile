@@ -17,6 +17,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'slim-rails'
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'octokit', '~> 3.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
