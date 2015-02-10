@@ -1,9 +1,8 @@
 class Repo < ActiveRecord::Base
 
-  REPO_FIELDS = [
-    :id,
-    :description,
+  GITHUB_KEYS = [
     :full_name,
+    :description,
     :html_url,
     :language,
     :forks_count,
@@ -11,14 +10,10 @@ class Repo < ActiveRecord::Base
   ]
 
   def self.create_from_github(github_repo)
-    attrs = {}
-    REPO_FIELDS.each do |key|
-      attrs[key] = github_repo[key]
+    find_or_create_by!(id: github_repo[:id]) do |repo|
+      GITHUB_KEYS.each { |key| repo[key] = github_repo[key] }
+      repo.repo_created_at = github_repo[:created_at]
+      repo.repo_updated_at = github_repo[:updated_at]
     end
-    [:created_at, :updated_at].each do |key|
-      attrs[:"repo_#{key}"] = github_repo[key]
-    end
-    repo = find_or_initialize_by(id: attrs[:id])
-    repo.update_attributes(attrs)
   end
 end
