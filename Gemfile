@@ -19,6 +19,9 @@ gem 'omniauth'
 gem 'omniauth-github'
 gem 'octokit', '~> 3.0'
 
+gem 'sinatra'
+gem 'sidekiq'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

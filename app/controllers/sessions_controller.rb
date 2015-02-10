@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
     auth_hash = request.env['omniauth.auth']
     user = User.find_with_auth(auth_hash) || User.create_with_auth(auth_hash)
     session[:user_id] = user.id
+    StarredWorker.perform_async(user.id, auth_hash["credentials"]["token"])
     redirect_to root_url, notice: "Hi #{user.name}! You've signed in."
   end
 
