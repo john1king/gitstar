@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20150209132915) do
   end
 
   create_table "repos", force: :cascade do |t|
-    t.string  "description",      limit: 255
+    t.string  "description",      limit: 1000
     t.string  "full_name",        limit: 255
     t.string  "html_url",         limit: 255
     t.string  "language",         limit: 255
@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 20150209132915) do
     t.integer "stargazers_count", limit: 4
     t.time    "repo_created_at"
     t.time    "repo_updated_at"
-    t.time    "pushed_at"
   end
 
   create_table "users", force: :cascade do |t|

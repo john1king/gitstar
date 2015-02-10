@@ -8,7 +8,6 @@ class Repo < ActiveRecord::Base
     :language,
     :forks_count,
     :stargazers_count,
-    :pushed_at,
   ]
 
   def self.create_from_github(github_repo)
