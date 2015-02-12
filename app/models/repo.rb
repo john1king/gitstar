@@ -1,20 +1,28 @@
 class Repo < ActiveRecord::Base
   has_many :stars
   has_many :users, through: :stars
-  GITHUB_KEYS = [
-    :full_name,
-    :description,
-    :html_url,
-    :language,
-    :forks_count,
-    :stargazers_count,
-  ]
+  GITHUB_COLUMNS = %i(
+    full_name
+    description
+    html_url
+    language
+    forks_count
+    stargazers_count
+    created_at
+    updated_at
+  )
 
   def self.create_from_github(github_repo)
     find_or_create_by!(id: github_repo[:id]) do |repo|
-      GITHUB_KEYS.each { |key| repo[key] = github_repo[key] }
-      repo.repo_created_at = github_repo[:created_at]
-      repo.repo_updated_at = github_repo[:updated_at]
+      GITHUB_COLUMNS.each do |column|
+        repo[ensure_column_name(column)] = github_repo[column]
+      end
     end
   end
+
+  def self.ensure_column_name(name)
+    column = "origin_#{name}"
+    column.in?(column_names) ? column.to_sym : name
+  end
+
 end

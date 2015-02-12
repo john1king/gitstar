@@ -14,4 +14,8 @@ class User < ActiveRecord::Base
     user.save!
     user
   end
+
+  def star_repo(repo, pushed_at=DateTime.now)
+      stars.create pushed_at: pushed_at
+  end
 end
