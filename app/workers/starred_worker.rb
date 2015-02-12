@@ -9,7 +9,7 @@ class StarredWorker
     loop do
       last_response.data.each { |github_repo|
         repo = Repo.create_from_github(github_repo)
-        user.star_repo(repo, github_repo[:pushed_at])
+        user.star_repo(repo, github_repo[:starred_at])
       }
       break if last_response.rels[:next].nil?
       last_response = last_response.rels[:next].get

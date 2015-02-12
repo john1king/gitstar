@@ -36,12 +36,12 @@ ActiveRecord::Schema.define(version: 20150212025413) do
   end
 
   create_table "stars", force: :cascade do |t|
-    t.integer  "user_id",   limit: 4
-    t.integer  "repo_id",   limit: 4
-    t.datetime "pushed_at"
+    t.integer  "user_id",    limit: 4
+    t.integer  "repo_id",    limit: 4
+    t.datetime "starred_at"
   end
 
-  add_index "stars", ["pushed_at"], name: "index_stars_on_pushed_at", using: :btree
+  add_index "stars", ["starred_at"], name: "index_stars_on_starred_at", using: :btree
   add_index "stars", ["user_id", "repo_id"], name: "index_stars_on_user_id_and_repo_id", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|

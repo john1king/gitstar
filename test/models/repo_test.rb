@@ -10,7 +10,7 @@ class RepoTest < ActiveSupport::TestCase
       :description=>"Actor-based concurrent object framework for Ruby",
       :created_at=>"2011-03-31 04:05:41 UTC",
       :updated_at=>"2015-02-12 03:25:45 UTC",
-      :pushed_at=>"2015-01-11 03:22:38 UTC",
+      :starred_at=>"2015-01-11 03:22:38 UTC",
       :stargazers_count=>2686,
       :language=>"Ruby",
       :forks_count=>200,

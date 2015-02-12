@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
     user
   end
 
-  def star_repo(repo, pushed_at=DateTime.now)
-      stars.create pushed_at: pushed_at
+  def star_repo(repo, starred_at=DateTime.now)
+      stars.create starred_at: starred_at
   end
 end
