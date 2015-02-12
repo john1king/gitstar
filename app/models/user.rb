@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   def self.create_with_auth(auth_hash)
     user = new name: auth_hash["info"]["nickname"], email: auth_hash["info"]["email"]
-    user.authorizations.build provider: auth_hash["provider"], uid: auth_hash["uid"], access_token: auth_hash["credentials"]["token"]
+    user.authorizations.build provider: auth_hash["provider"], uid: auth_hash["uid"]
     user.save!
     user
   end
