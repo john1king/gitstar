@@ -1,5 +1,6 @@
 class Repo < ActiveRecord::Base
-
+  has_many :stars
+  has_many :users, through: :stars
   GITHUB_KEYS = [
     :full_name,
     :description,
