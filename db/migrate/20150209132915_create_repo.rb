@@ -6,11 +6,12 @@ class CreateRepo < ActiveRecord::Migration
       t.string :html_url
       t.string :language
       t.integer :forks_count
-      t.integer :stargazers_count
-      t.time :repo_created_at
-      t.time :repo_updated_at
+      t.integer :origin_stargazers_count
+      t.datetime :origin_created_at
+      t.datetime :origin_updated_at
+      t.integer :stargazers_count, default: 0
 
-      t.timestamp
+      t.timestamps null: false
     end
   end
 end
