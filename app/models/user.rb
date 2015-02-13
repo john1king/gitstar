@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :authorizations
-  has_many :stars
+  has_many :stars, -> { where(active: true) }
   has_many :repos, through: :stars
   validates :name, :email, :presence => true
 
@@ -16,6 +16,12 @@ class User < ActiveRecord::Base
   end
 
   def star_repo(repo, starred_at=DateTime.now)
-      stars.create starred_at: starred_at
+    star = Star.find_or_initialize_by(user: self, repo: repo)
+    star.update(starred_at: starred_at, active: true)
   end
+
+  def unstar_repo(repo)
+    stars.where(repo: repo).update_all(active: false)
+  end
+
 end
