@@ -6,8 +6,8 @@ class StarredWorker
   def perform(user_id, access_token)
     @user = User.find(user_id)
     @client = Octokit::Client.new(access_token: access_token)
-    return unless updated?
-    list_starred(100)
+    return if not_updated?
+    list_starred_batch(100)
     paginate @client.last_response do |data|
       data.each { |star|
         repo = Repo.create_from_github(star[:repo])
@@ -18,8 +18,8 @@ class StarredWorker
 
   private
 
-  def list_starred(pre_page=30)
-    @client.starred(nil, per_page: pre_page, accept: STARRED_MEDIA_TYPE)
+  def list_starred_batch(per_page=30)
+    @client.starred(nil, per_page: per_page, accept: STARRED_MEDIA_TYPE)
   end
 
   def paginate(response)
@@ -31,13 +31,26 @@ class StarredWorker
     end
   end
 
-  def updated?
-    last_github_star = list_starred(1).first
-    last_star = @user.stars.order(:starred_at).last
-    starred_count = /\bpage=(\d+)/.match(@client.last_response.rels[:last].href)[1]
-    !(@user.stars_count.to_s == starred_count &&
-      last_star.id == last_github_star[:repo][:id] &&
-      last_star.starred_at == last_github_star[:starred_at])
+  def not_updated?
+    github_star = list_starred_batch(1).first
+    star = @user.stars.first
+    # 注意 starred_count 必须在 list_starred_batch(1) 之后调用
+    @user.stars_count == starred_count &&
+      # 数据正确的情况下，count 相等就不会只有其中一者为 nil，下面一行的判断可删除
+      (star.nil? && github_star.nil?) ||
+        (star.present? && star.present? &&
+         star.id == github_star[:repo][:id] &&
+         star.starred_at == github_star[:starred_at])
+  end
+
+  def starred_count
+    return @starred_count if defined? @starred_count
+    last_page = @client.last_response.rels[:last]
+    if last_page
+      /\bpage=(\d+)/.match(last_page.href)[1].to_i
+    else
+      @client.last_response.data.size
+    end
   end
 
 end

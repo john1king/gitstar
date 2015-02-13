@@ -1,5 +1,5 @@
 class Repo < ActiveRecord::Base
-  has_many :stars, -> { where(active: true) }
+  has_many :stars, -> { where(active: true).order(starred_at: :desc) }
   has_many :users, through: :stars
   GITHUB_COLUMNS = %i(
     full_name
