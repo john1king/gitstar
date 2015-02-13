@@ -11,22 +11,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150207032810) do
+ActiveRecord::Schema.define(version: 20150212025413) do
 
   create_table "authorizations", force: :cascade do |t|
-    t.string   "provider",     limit: 255
-    t.string   "uid",          limit: 255
-    t.string   "access_token", limit: 255
-    t.integer  "user_id",      limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "email",      limit: 255
+    t.string   "provider",   limit: 255
+    t.string   "uid",        limit: 255
+    t.integer  "user_id",    limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "repos", force: :cascade do |t|
+    t.string   "description",             limit: 1000
+    t.string   "full_name",               limit: 255
+    t.string   "html_url",                limit: 255
+    t.string   "language",                limit: 255
+    t.integer  "forks_count",             limit: 4
+    t.integer  "origin_stargazers_count", limit: 4
+    t.datetime "origin_created_at"
+    t.datetime "origin_updated_at"
+    t.integer  "stargazers_count",        limit: 4,    default: 0
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+  end
+
+  create_table "stars", force: :cascade do |t|
+    t.integer  "user_id",      limit: 4
+    t.integer  "repo_id",      limit: 4
+    t.datetime "starred_at"
+    t.datetime "last_updated"
+    t.string   "description",  limit: 1000, default: "",   null: false
+    t.boolean  "active",       limit: 1,    default: true
+  end
+
+  add_index "stars", ["starred_at"], name: "index_stars_on_starred_at", using: :btree
+  add_index "stars", ["user_id", "repo_id"], name: "index_stars_on_user_id_and_repo_id", unique: true, using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "email",       limit: 255
+    t.integer  "stars_count", limit: 4,   default: 0
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
 end
