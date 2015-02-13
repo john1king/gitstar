@@ -4,4 +4,6 @@
 - if current_user
   a href=logout_url data-method="delete" 退出
 - else
-  a href="/auth/github/" 使用 GitHub 登录
+  a href="/auth/github/"
+    = fa_icon "github 3x"
+    | 使用 GitHub 登录

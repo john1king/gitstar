@@ -25,4 +25,12 @@ class Repo < ActiveRecord::Base
     column.in?(column_names) ? column.to_sym : name
   end
 
+  def owner
+    full_name.split('/')[0]
+  end
+
+  def name
+    full_name.split('/')[1]
+  end
+
 end
