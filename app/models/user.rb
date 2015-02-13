@@ -15,13 +15,19 @@ class User < ActiveRecord::Base
     user
   end
 
-  def star_repo(repo, starred_at=DateTime.now)
+  def star_repo(repo, starred_at=DateTime.now, last_updated=nil)
     star = Star.find_or_initialize_by(user: self, repo: repo)
-    star.update(starred_at: starred_at, active: true)
+    values = {starred_at: starred_at, active: true}
+    values[:last_updated] = last_updated if last_updated
+    star.update(values)
   end
 
   def unstar_repo(repo)
     stars.where(repo: repo).update_all(active: false)
+  end
+
+  def unstar_deleted_repo(last_updated)
+    stars.where('last_updated < ?', last_updated).update_all(active: false)
   end
 
 end

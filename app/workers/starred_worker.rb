@@ -7,13 +7,15 @@ class StarredWorker
     @user = User.find(user_id)
     @client = Octokit::Client.new(access_token: access_token)
     return if not_updated?
+    last_updated = DateTime.now
     list_starred_batch(100)
     paginate @client.last_response do |data|
       data.each { |star|
         repo = Repo.create_from_github(star[:repo])
-        @user.star_repo(repo, star[:starred_at])
+        @user.star_repo(repo, star[:starred_at], last_updated)
       }
     end
+    @user.unstar_deleted_repo(last_updated)
   end
 
   private
