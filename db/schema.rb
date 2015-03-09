@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20150212025413) do
   create_table "users", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "email",       limit: 255
+    t.string   "avatar_url",  limit: 255
     t.integer  "stars_count", limit: 4,   default: 0
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
