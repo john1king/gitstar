@@ -1,4 +1,15 @@
+nav class="navbar navbar-default navbar-fixed-top"
+  form class="navbar-form navbar-left" role="search"
+    div class="form-group"
+      input type="text" name="q" class="form-control" placeholder="Search"
 
-img src="#{@user.avatar_url + '&s=48'}" class="img-circle" width="48" height="48"
-  | #{@user.name}
+  ul.nav.navbar-right
+    li
+      span.dropdown-toggle data-toggle="dropdown"
+        img src="#{@user.avatar_url + '&s=40'}" class="img-circle" width="40" height="40"
+          | #{@user.name}
+        span.caret
 
+      ul.dropdown-menu
+        li
+          a href=logout_url data-method="delete" 退出
