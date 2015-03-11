@@ -8,8 +8,9 @@ nav#nav class="navbar"
   ul.nav.pull-right
     li
       span.dropdown-toggle data-toggle="dropdown"
-        img src="#{@user.avatar_url + '&s=40'}" class="img-circle" width="40" height="40"
-          | #{@user.name}
+        - size = 48
+        img.img-circle src="#{@user.avatar_url + '&s=#{size}'}" width=size height=size
+        span.username = @user.name
         span.caret
 
       ul.dropdown-menu

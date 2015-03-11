@@ -21,6 +21,7 @@ $sidebar-width: 240px;
 $nav-height: 60px;
 $repo-list-width: 400px;
 $border-color: #EEF1F5;
+$font-color: #7B7D82;
 
 .layout {
   position: absolute;
@@ -28,7 +29,6 @@ $border-color: #EEF1F5;
   right: 0;
   bottom: 0;
   left: 0;
-  overflow-y: auto;
   box-sizing: border-box;
 }
 
@@ -45,6 +45,20 @@ $border-color: #EEF1F5;
   left: $sidebar-width;
   height: $nav-height;
   border-bottom: 1px solid $border-color;
+  .nav {
+    height: $nav-height;
+    margin-right: 2em;
+    color: $font-color;
+    & > li {
+      margin-top: ($nav-height - 48)/2;
+    }
+    .dropdown-toggle {
+      cursor: pointer;
+    }
+    .username {
+      margin: 0 1em;
+    }
+  }
 }
 
 #repos {
@@ -54,6 +68,8 @@ $border-color: #EEF1F5;
   width: $repo-list-width;
   padding: 0;
   margin: 0;
+  overflow-y: auto;
+  border-right: 1px solid $border-color;
 
   li {
     list-style: none;
@@ -81,7 +97,7 @@ $border-color: #EEF1F5;
     }
 
     p {
-      color: #7B7D82;
+      color: $font-color;
       line-height: 20px;
       max-height: 60px;
       overflow: hidden;
@@ -102,6 +118,7 @@ $border-color: #EEF1F5;
 
 #readme {
   @extend .layout;
+  overflow-y: auto;
   top: $nav-height;
   left: $sidebar-width + $repo-list-width;
 }
