@@ -1,28 +1,22 @@
-.col-md-3
-  .row
-    | tag list
 
-.col-md-9
-  .row
-    nav class="navbar navbar-default"
-      form class="navbar-form pull-left" role="search"
-        div class="form-group"
-          input type="text" name="q" class="form-control" placeholder="Search"
 
-      ul.nav.pull-right
+nav#nav class="navbar"
+  form class="navbar-form pull-left" role="search"
+    div class="form-group"
+      input type="text" name="q" class="form-control" placeholder="Search"
+
+  ul.nav.pull-right
+    li
+      span.dropdown-toggle data-toggle="dropdown"
+        img src="#{@user.avatar_url + '&s=40'}" class="img-circle" width="40" height="40"
+          | #{@user.name}
+        span.caret
+
+      ul.dropdown-menu
         li
-          span.dropdown-toggle data-toggle="dropdown"
-            img src="#{@user.avatar_url + '&s=40'}" class="img-circle" width="40" height="40"
-              | #{@user.name}
-            span.caret
+          a href=logout_url data-method="delete" 退出
 
-          ul.dropdown-menu
-            li
-              a href=logout_url data-method="delete" 退出
+div#sidebar
+div#repos
+div#readme
 
-
-    .col-md-4
-      | repos list
-
-    .col-md-8
-      | repo readme

@@ -16,3 +16,44 @@
 
 @import "bootstrap";
 @import "font-awesome";
+
+$sidebar-width: 240px;
+$nav-height: 60px;
+$repo-list-width: 320px;
+
+.layout {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+#sidebar {
+  @extend .layout;
+  right: auto;
+  width: $sidebar-width;
+  background: #3C4174;
+}
+
+#nav {
+  @extend .layout;
+  position: absolute;
+  left: $sidebar-width;
+  height: $nav-height;
+}
+
+#repos {
+  @extend .layout;
+  top: $nav-height;
+  left: $sidebar-width;
+  width: $repo-list-width;
+  background: #91D0CD;
+}
+
+#readme {
+  @extend .layout;
+  top: $nav-height;
+  left: $sidebar-width + $repo-list-width;
+  background: #77B8DA;
+}
