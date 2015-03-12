@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
   def index
     if signed_in?
-      redirect_to home_url
+      redirect_to stars_url
     else
       render :new
     end
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
     user = User.find_with_auth(auth_hash) || User.create_with_auth(auth_hash)
     session[:user_id] = user.id
     StarredWorker.perform_async(user.id, auth_hash["credentials"]["token"])
-    redirect_to home_url
+    redirect_to stars_url
   end
 
   def destroy
