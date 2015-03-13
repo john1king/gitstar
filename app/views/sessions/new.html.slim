@@ -1,9 +1,12 @@
-- flash.each do |name, msg|
-  div class=name = msg
+h1 GitHub Stars
+p 轻松管理你感兴趣的项目
 
-- if current_user
-  a href=logout_url data-method="delete" 退出
-- else
-  a href="/auth/github/"
-    = fa_icon "github 3x"
-    | 使用 GitHub 登录
+a.btn-login href="/auth/github/"
+  = fa_icon "github 3x"
+  | GitHub 登录
+
+a href="https://github.com/john1king/gitstar"
+  = fa_icon "code-fork 2x"
+
+a href="https://twitter.com/john1king"
+  = fa_icon "twitter 2x"
