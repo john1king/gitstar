@@ -1,14 +1,18 @@
-- content_for :body_class, 'home-page'
+- content_for :html_class, 'home-page'
 
-h1 GitHub Stars
-p 轻松管理你感兴趣的项目
 
-a.btn-login href="/auth/github/"
-  = fa_icon "github 3x"
-  | GitHub 登录
+.wrapper
+  .summary
+    h1 GitHub Stars
+    p 轻松标记和管理你感兴趣的项目
 
-a href="https://github.com/john1king/gitstar"
-  = fa_icon "code-fork 2x"
+    a.btn-login href="/auth/github/"
+      = fa_icon "github"
+      span GitHub 登录
 
-a href="https://twitter.com/john1king"
-  = fa_icon "twitter 2x"
+.links
+  a href="https://github.com/john1king/gitstar"
+    = fa_icon "code-fork"
+
+  a href="https://twitter.com/john1king"
+    = fa_icon "twitter"

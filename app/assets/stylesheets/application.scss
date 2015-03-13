@@ -22,6 +22,8 @@ $nav-height: 60px;
 $repo-list-width: 400px;
 $border-color: #EEF1F5;
 $font-color: #7B7D82;
+$bg-color: #242E41;
+$white-color: rgba(255, 255, 255, .75);
 
 .layout {
   position: absolute;
@@ -32,13 +34,87 @@ $font-color: #7B7D82;
   box-sizing: border-box;
 }
 
+.home-page {
+  height: 100%;
+  body {
+    background-color: $bg-color;
+    background-image: url('stars-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: $white-color;
+    font-size: 16px;
+    height: 100%;
+
+    display: -webkit-flex;
+    -webkit-align-items: center;
+    -webkit-justify-content: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .summary {
+      text-align: center;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 24px;
+    }
+
+    .btn-login {
+      margin: 20px 0;
+      color: $white-color;
+      display: inline-block;
+      border: 2px solid $white-color;
+      border-radius: 25px;
+      padding: 3px 5px;
+      padding-right: 1em;
+
+      i {
+        font-size: 40px;
+        vertical-align: middle;
+      }
+      span {
+        font-size: 16px;
+        display: inline-block;
+        margin: 0 5px 0 10px;
+        vertical-align: middle;
+      }
+    }
+
+    .links {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      a {
+        display: inline-block;
+        color: $white-color;
+        border: 2px solid $white-color;
+        border-radius: 15px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        margin-left: 10px;
+        text-align: center;
+        vertical-align: middle;
+        opacity: .5;
+        i {
+          font-size: 20px;
+        }
+      }
+
+    }
+  }
+}
+
 .stars-page {
 
   #sidebar {
     @extend .layout;
     right: auto;
     width: $sidebar-width;
-    background: #242E41;
+    background: $bg-color;
   }
 
   #nav {
