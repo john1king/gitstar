@@ -13,4 +13,34 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap-sprockets
+//= require jquery.waypoints
 //= require_tree .
+
+$(function(){
+  var $container = $('#repos')
+  var $repos = $('#repos ul');
+  var opts = {
+    context: $container,
+    offset: 'bottom-in-view'
+  }
+  var onscroll = function(direction){
+    if (direction == 'up') return;
+    var $next = $container.find('.next');
+    if ($next.length){
+      var url = $next.attr('href');
+      $container.append('<div class="spinner"></div>');
+      $next.remove();
+      $.ajax({
+        url: url,
+        dataType: 'script',
+        success: function(){
+          $repos.waypoint(onscroll, opts);
+        }
+      });
+    }
+    this.destroy()
+  }
+  $repos.waypoint(onscroll, opts);
+});
+

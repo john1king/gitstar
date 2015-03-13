@@ -1,0 +1,14 @@
+li
+  h3
+    a href=repo.html_url
+      span.owner = repo.owner
+      span.slash = '/'
+      = repo.name
+  p = repo.description
+  div.repo-stats
+    span
+      i.fa.fa-star
+      = repo.origin_stargazers_count
+    span
+      i.fa.fa-code-fork
+      = repo.forks_count
