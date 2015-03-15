@@ -128,6 +128,18 @@ $white-color: rgba(255, 255, 255, .75);
           float: right;
         }
       }
+      ul {
+        padding: 0;
+        margin: 0;
+        li {
+          list-style: none;
+        }
+      }
+      input[type=text] {
+        border: none;
+        background-color: rgba(0, 0, 0, .5);
+        color: #FFF;
+      }
     }
   }
 

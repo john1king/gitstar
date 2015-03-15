@@ -21,8 +21,10 @@ nav#nav class="navbar"
   #tags
     .title
       | 标签
-      a href="#create_tag"
+      a href=new_tag_path data-remote="true"
         = fa_icon "plus"
+    ul
+      = render @tags
 
 #repos
   ul
