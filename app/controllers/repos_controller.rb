@@ -2,7 +2,7 @@ class ReposController < ApplicationController
   before_action :require_signed_in_user
 
   def index
-    @repos = @user.repos.order(:origin_created_at)
+    @repos = @user.repos
       .offset((page_params[:page] - 1)*page_params[:per])
       .limit(page_params[:per])
     if page_params[:page] * page_params[:per] < @user.stars_count
