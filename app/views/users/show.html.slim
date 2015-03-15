@@ -17,9 +17,15 @@ nav#nav class="navbar"
         li
           a href=logout_url data-method="delete" 退出
 
-div#sidebar
+#sidebar
+  #tags
+    .title
+      | 标签
+      a href="#create_tag"
+        = fa_icon "plus"
+
 #repos
   ul
   a.next href=repos_url
-div#readme-container
+#readme-container
 

@@ -116,6 +116,19 @@ $white-color: rgba(255, 255, 255, .75);
     right: auto;
     width: $sidebar-width;
     background: $bg-color;
+    color: #FFF;
+
+    #tags {
+      .title {
+        font-size: 16px;
+        padding: 10px 10px 5px;
+        border-bottom: 1px solid $white-color;
+        a {
+          color: #FFF;
+          float: right;
+        }
+      }
+    }
   }
 
   #nav {
