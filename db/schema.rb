@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150212025413) do
+ActiveRecord::Schema.define(version: 20150315023138) do
 
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider",   limit: 255
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(version: 20150212025413) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "readmes", force: :cascade do |t|
+    t.integer "repo_id",    limit: 4,                     null: false
+    t.text    "content",    limit: 65535
+    t.boolean "is_loading", limit: 1,     default: false
+  end
+
+  add_index "readmes", ["repo_id"], name: "index_readmes_on_repo_id", unique: true, using: :btree
 
   create_table "repos", force: :cascade do |t|
     t.string   "description",             limit: 1000
