@@ -201,8 +201,9 @@ $white-color: rgba(255, 255, 255, .75);
     }
   }
 
-  #readme {
+  #readme-container {
     @extend .layout;
+    padding: 20px;
     overflow-y: auto;
     top: $nav-height;
     left: $sidebar-width + $repo-list-width;
