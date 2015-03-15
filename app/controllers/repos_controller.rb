@@ -13,6 +13,13 @@ class ReposController < ApplicationController
     end
   end
 
+  def readme
+    @content = @user.repos.find(params[:id]).readme.content
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def page_params

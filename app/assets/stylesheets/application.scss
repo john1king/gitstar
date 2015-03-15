@@ -16,6 +16,7 @@
 
 @import "bootstrap";
 @import "font-awesome";
+@import "github-markdown";
 
 $sidebar-width: 240px;
 $nav-height: 60px;
@@ -200,8 +201,9 @@ $white-color: rgba(255, 255, 255, .75);
     }
   }
 
-  #readme {
+  #readme-container {
     @extend .layout;
+    padding: 20px;
     overflow-y: auto;
     top: $nav-height;
     left: $sidebar-width + $repo-list-width;
