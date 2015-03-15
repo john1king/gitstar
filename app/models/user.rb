@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   has_many :authorizations
   has_many :stars, -> { where(active: true).order(starred_at: :desc) }
   has_many :repos, through: :stars
+  has_many :tags
+
   validates :name, :email, :presence => true
 
   def self.find_with_auth(auth_hash)
