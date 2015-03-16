@@ -25,6 +25,7 @@ $border-color: #EEF1F5;
 $font-color: #7B7D82;
 $bg-color: #242E41;
 $white-color: rgba(255, 255, 255, .75);
+$dark-bg: rgba(0, 0, 0, .25);
 
 .layout {
   position: absolute;
@@ -133,6 +134,30 @@ $white-color: rgba(255, 255, 255, .75);
         margin: 0;
         li {
           list-style: none;
+          position: relative;
+          a.tag {
+            display: block;
+            color: #FFF;
+            padding: 10px;
+            text-decoration: none;
+            &:hover {
+              background: $dark-bg;
+            }
+            .fa {
+              margin-right: 10px;
+              color: $white-color;
+            }
+            span {
+              font-size: 12px;
+              color: $white-color;
+              background: $dark-bg;
+              display: inline-block;
+              margin-left: 10px;
+              border-radius: 10px;
+              padding: 0 8px;
+
+            }
+          }
         }
       }
       input[type=text] {
