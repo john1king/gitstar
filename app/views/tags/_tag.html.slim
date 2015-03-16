@@ -3,4 +3,8 @@ li
     = fa_icon 'tag'
     = tag.name
     span = tag.stars_count
-  a.edit_tag href=edit_tag_path(tag) data-remote="true"
+  span.tag-action
+    a href=edit_tag_path(tag) data-remote="true"
+      = fa_icon 'pencil'
+    a href=tag_path(tag) data-remote="true" data-method="delete"
+      = fa_icon 'trash'

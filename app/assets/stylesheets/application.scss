@@ -135,14 +135,11 @@ $dark-bg: rgba(0, 0, 0, .25);
         li {
           list-style: none;
           position: relative;
-          a.tag {
+          .tag {
             display: block;
             color: #FFF;
             padding: 10px;
             text-decoration: none;
-            &:hover {
-              background: $dark-bg;
-            }
             .fa {
               margin-right: 10px;
               color: $white-color;
@@ -155,7 +152,23 @@ $dark-bg: rgba(0, 0, 0, .25);
               margin-left: 10px;
               border-radius: 10px;
               padding: 0 8px;
-
+            }
+          }
+          .tag-action {
+            display: none;
+            font-size: 16px;
+            a {
+              color: $white-color;
+              margin-right: 10px;
+            }
+          }
+          &:hover {
+            background: $dark-bg;
+            .tag-action {
+              display: block;
+              position: absolute;
+              top:  8px;
+              right: 0;
             }
           }
         }
