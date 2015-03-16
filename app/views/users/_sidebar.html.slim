@@ -1,0 +1,8 @@
+#sidebar
+  #tags
+    .title
+      | 标签
+      a href=new_tag_path data-remote="true"
+        = fa_icon "plus"
+    ul
+      = render @tags
