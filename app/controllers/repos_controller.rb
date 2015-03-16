@@ -20,6 +20,31 @@ class ReposController < ApplicationController
     end
   end
 
+  def edit_tag
+    @repo = @user.repos.find(params[:id])
+    @tags = @repo.stars.find_by(user: @user).tags
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def update_tag
+    @repo = @user.repos.find(params[:id])
+    star = @repo.stars.find_by(user: @user)
+    old_tags = star.tags.map {|tag| [tag.name, tag]}.to_h
+    @tags = params[:tag_names].split.map do  |name|
+      old_tags[name] || @user.tags.create(name: name).tap {|tag| star.tags << tag}
+    end
+
+    old_tags.each do |_,  tag|
+      star.tags.delete(tag)
+    end
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def page_params

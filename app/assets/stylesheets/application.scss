@@ -181,6 +181,12 @@ $dark-bg: rgba(0, 0, 0, .25);
     }
   }
 
+  #repo-tags {
+    .modal-dialog {
+      width: 400px;
+    }
+  }
+
   #nav {
     @extend .layout;
     position: absolute;

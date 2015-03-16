@@ -4,11 +4,13 @@ li data-readme-url=readme_repo_path(repo)
       span.owner = repo.owner
       span.slash = '/'
       = repo.name
+    a.edit-tag href=edit_tag_repo_path(repo) data-remote="true"
+      = fa_icon 'tag'
   p = repo.description
-  div.repo-stats
+  .repo-stats
     span
-      i.fa.fa-star
+      = fa_icon 'star'
       = repo.origin_stargazers_count
     span
-      i.fa.fa-code-fork
+      = fa_icon 'code-fork'
       = repo.forks_count

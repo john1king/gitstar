@@ -12,7 +12,11 @@ Rails.application.routes.draw do
   get '/stars', to: 'users#show', as: :stars
 
   resources :repos do
-    get :readme, on: :member
+    member do
+      get :readme
+      get :edit_tag
+      post :update_tag
+    end
   end
 
   resources :tags
