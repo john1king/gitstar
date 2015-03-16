@@ -1,1 +1,2 @@
-$('#repo-tags').modal('hide')
+$('#repo-tags').modal('hide');
+$('#tags ul').html("<%= j render @user.tags %>")
