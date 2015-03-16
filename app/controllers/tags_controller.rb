@@ -15,6 +15,21 @@ class TagsController < ApplicationController
     end
   end
 
+  def edit
+    @tag = @user.tags.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def update
+    @tag = @user.tags.find(params[:id])
+    @tag.update(tag_params)
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def destroy
     @tag = @user.tags.find(params[:id])
     @tag.destroy
