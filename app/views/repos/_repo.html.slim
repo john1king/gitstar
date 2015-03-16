@@ -1,11 +1,9 @@
-li data-readme-url=readme_repo_path(repo)
+li id="repo-#{repo.id}" data-readme-url=readme_repo_path(repo)
   h3
     a href=repo.html_url target="_blank"
       span.owner = repo.owner
       span.slash = '/'
       = repo.name
-    a.edit-tag href=edit_tag_repo_path(repo) data-remote="true"
-      = fa_icon 'tag'
   p = repo.description
   .repo-stats
     span
@@ -14,3 +12,13 @@ li data-readme-url=readme_repo_path(repo)
     span
       = fa_icon 'code-fork'
       = repo.forks_count
+    a.edit-tag href=edit_tag_repo_path(repo) data-remote="true"
+      = fa_icon 'tag'
+      - has_tag = false
+      - repo.stars.each do |star|
+        - star.tags.each do |tag|
+          - has_tag = true
+          i.tag = tag.name
+      - unless has_tag
+        | 编辑标签
+

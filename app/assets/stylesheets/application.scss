@@ -253,12 +253,20 @@ $dark-bg: rgba(0, 0, 0, .25);
           overflow: hidden;
         }
 
-        .repo-stats span {
-          margin-right: 2em;
-          color: #39548B;
-          font-weight: bold;
+        .repo-stats {
           font-size: 12px;
-          .fa {
+          span {
+            font-weight: bold;
+          }
+          span, a {
+            margin-right: 2em;
+            color: #39548B;
+            .fa {
+              margin-right: 0.5em;
+            }
+          }
+          a .tag {
+            font-style: normal;
             margin-right: 0.5em;
           }
         }
