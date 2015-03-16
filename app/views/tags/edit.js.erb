@@ -1,2 +1,1 @@
-$("#tag-<%= @tag.id %>").replaceWith('<li id="tag-<%= @tag.id%>"><%= j render "form" %></li>')
-$("#tag-<%= @tag.id %>").find('input[type=text]').focusEnd()
+$("#tag-<%= @tag.id %>").html('<%= j render "form" %>').find('input[type=text]').focusEnd()
