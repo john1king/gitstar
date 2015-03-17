@@ -9,13 +9,16 @@ Rails.application.routes.draw do
   get '/auth/failure', to: 'sessions#failure'
   delete '/logout', to: 'sessions#destroy', as: :logout
 
-  resources :stars
+  resources :stars do
+    member do
+      get :edit_tag
+      post :update_tag
+    end
+  end
 
   resources :repos do
     member do
       get :readme
-      get :edit_tag
-      post :update_tag
     end
   end
 

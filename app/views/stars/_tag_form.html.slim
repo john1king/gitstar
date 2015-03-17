@@ -1,5 +1,5 @@
 .modal-dialog
   .modal-content
     .modal-body
-      = form_tag update_tag_repo_path(@repo), remote: true do |f|
+      = form_tag update_tag_star_path(@star), remote: true do |f|
         input.form-control name="tag_names" type="text" value=@tags.map(&:name).join(' ')

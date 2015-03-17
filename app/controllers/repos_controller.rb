@@ -6,25 +6,6 @@ class ReposController < ApplicationController
     respond_to_ujs
   end
 
-  def edit_tag
-    @repo = @user.repos.find(params[:id])
-    @tags = @repo.stars.find_by(user: @user).tags
-    respond_to_ujs
-  end
-
-  def update_tag
-    @repo = @user.repos.find(params[:id])
-    star = @repo.stars.find_by(user: @user)
-    old_tags = star.tags.map {|tag| [tag.name, tag]}.to_h
-    @tags = params[:tag_names].split.map do  |name|
-      old_tags.delete(name) || @user.tags.find_or_create_by(name: name).tap {|tag| star.tags << tag}
-    end
-    old_tags.each do |_,  tag|
-      star.tags.delete(tag)
-    end
-    respond_to_ujs
-  end
-
   private
 
   def page_params
