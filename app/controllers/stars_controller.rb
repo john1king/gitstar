@@ -1,7 +1,7 @@
-class UsersController < ApplicationController
+class StarsController < ApplicationController
   before_action :require_signed_in_user
 
-  def show
+  def index
     @tags = @user.tags
   end
 

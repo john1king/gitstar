@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get '/auth/failure', to: 'sessions#failure'
   delete '/logout', to: 'sessions#destroy', as: :logout
 
-  get '/stars', to: 'users#show', as: :stars
+  resources :stars
 
   resources :repos do
     member do
