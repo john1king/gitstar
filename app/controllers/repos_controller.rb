@@ -15,24 +15,18 @@ class ReposController < ApplicationController
      if (@page = page_params[:page]) * page_params[:per] < total
       @next_page_url = repos_url(page_params.dup.tap {|p| p[:page] += 1})
     end
-    respond_to do |format|
-      format.js
-    end
+    respond_to_ujs
   end
 
   def readme
     @content = @user.repos.find(params[:id]).readme.content
-    respond_to do |format|
-      format.js
-    end
+    respond_to_ujs
   end
 
   def edit_tag
     @repo = @user.repos.find(params[:id])
     @tags = @repo.stars.find_by(user: @user).tags
-    respond_to do |format|
-      format.js
-    end
+    respond_to_ujs
   end
 
   def update_tag
@@ -45,10 +39,7 @@ class ReposController < ApplicationController
     old_tags.each do |_,  tag|
       star.tags.delete(tag)
     end
-
-    respond_to do |format|
-      format.js
-    end
+    respond_to_ujs
   end
 
   private
@@ -63,3 +54,4 @@ class ReposController < ApplicationController
   end
 
 end
+`

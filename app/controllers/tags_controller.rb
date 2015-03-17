@@ -3,39 +3,29 @@ class TagsController < ApplicationController
 
   def new
     @tag = Tag.new
-    respond_to do |format|
-      format.js
-    end
+    respond_to_ujs
   end
 
   def create
     @tag = @user.tags.create! tag_params
-    respond_to do |format|
-      format.js
-    end
+    respond_to_ujs
   end
 
   def edit
     @tag = @user.tags.find(params[:id])
-    respond_to do |format|
-      format.js
-    end
+    respond_to_ujs
   end
 
   def update
     @tag = @user.tags.find(params[:id])
     @tag.update(tag_params)
-    respond_to do |format|
-      format.js
-    end
+    respond_to_ujs
   end
 
   def destroy
     @tag = @user.tags.find(params[:id])
     @tag.destroy
-    respond_to do |format|
-      format.js
-    end
+    respond_to_ujs
   end
 
   private
