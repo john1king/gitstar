@@ -1,0 +1,19 @@
+(function(){
+  var html = '<%= j render @stars, format: :html %>';
+  $('#stars .spinner').remove();
+  <% if @page > 1 %>
+    $('#stars ul').append(html);
+  <% else%>
+    $('#stars ul').html(html);
+    $('#sidebar .active').removeClass('active');
+    <% if @tag %>
+      $('#tag-<%= @tag.id %>').find('.tag').addClass('active');
+    <% else %>
+      $('#sidebar .all-stars').addClass('active');
+    <% end %>
+  <% end %>
+  <% if @next_page_url %>
+    $('#stars').append('<a class="next" href="<%= @next_page_url %>"></a>');
+    $('#stars ul').infiniteScroll('#stars');
+  <% end %>
+})();

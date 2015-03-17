@@ -1,5 +1,5 @@
 $(function(){
-  $('#repos').on('click', 'li', function(){
+  $('#stars').on('click', 'li', function(){
     var $li = $(this);
     $.ajax({
       url: $li.data('readme-url'),
