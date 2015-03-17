@@ -6,15 +6,4 @@ class ReposController < ApplicationController
     respond_to_ujs
   end
 
-  private
-
-  def page_params
-    { page: fetch_int(:page, 1), per: [fetch_int(:per, 30), 100].min }
-  end
-
-  def fetch_int(key, default)
-    value = params[key].to_i
-    value.zero? ? default : value
-  end
-
 end
