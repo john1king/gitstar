@@ -1,5 +1,5 @@
 (function(){
-  var html = '<%= j render @repos, format: :html %>';
+  var html = '<%= j render @stars, format: :html %>';
   $('#repos .spinner').remove();
   <% if @page > 1 %>
     $('#repos ul').append(html);
