@@ -1,5 +1,5 @@
 
 
 $(function(){
-  $('#repos ul').infiniteScroll('#repos');
+  $('#stars ul').infiniteScroll('#stars');
 });
