@@ -1,0 +1,10 @@
+li id="tag-#{tag.id}"
+  a.tag href=repos_path(tag_id: tag.id) data-remote="true"
+    = fa_icon 'tag'
+    = tag.name
+    span.counter = tag.stars_count
+  span.tag-action
+    a href=edit_tag_path(tag) data-remote="true"
+      = fa_icon 'pencil'
+    a href=tag_path(tag) data-remote="true" data-method="delete"
+      = fa_icon 'trash'

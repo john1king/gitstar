@@ -1,25 +1,11 @@
 - content_for :body_class, 'stars-page'
 
-nav#nav class="navbar"
-  form class="navbar-form pull-left" role="search"
-    div class="form-group"
-      input type="text" name="q" class="form-control" placeholder="Search"
+= render 'nav'
+= render 'sidebar'
 
-  ul.nav.pull-right
-    li
-      span.dropdown-toggle data-toggle="dropdown"
-        - size = 48
-        img.img-circle src="#{@user.avatar_url + '&s=#{size}'}" width=size height=size
-        span.username = @user.name
-        span.caret
-
-      ul.dropdown-menu
-        li
-          a href=logout_url data-method="delete" 退出
-
-div#sidebar
 #repos
   ul
   a.next href=repos_url
-div#readme-container
+#readme-container
 
+#repo-tags.modal

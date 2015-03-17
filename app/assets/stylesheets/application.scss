@@ -25,6 +25,7 @@ $border-color: #EEF1F5;
 $font-color: #7B7D82;
 $bg-color: #242E41;
 $white-color: rgba(255, 255, 255, .75);
+$dark-bg: rgba(0, 0, 0, .25);
 
 .layout {
   position: absolute;
@@ -116,6 +117,90 @@ $white-color: rgba(255, 255, 255, .75);
     right: auto;
     width: $sidebar-width;
     background: $bg-color;
+    color: #FFF;
+    .all-repos {
+      display: block;
+      font-size: 16px;
+      padding: 10px;
+      border-bottom: 1px solid $white-color;
+      color: #FFF;
+      text-decoration: none;
+      .fa {
+        margin-right:  10px;
+      }
+    }
+
+    .counter {
+      font-size: 12px;
+      color: $white-color;
+      background: $dark-bg;
+      display: inline-block;
+      margin-left: 10px;
+      border-radius: 10px;
+      padding: 0 8px;
+    }
+
+    .active {
+      background: $dark-bg;
+    }
+
+    #tags {
+      .title {
+        font-size: 16px;
+        padding: 10px;
+        border-bottom: 1px solid $white-color;
+        a {
+          color: #FFF;
+          float: right;
+        }
+      }
+      ul {
+        padding: 0;
+        margin: 0;
+        li {
+          list-style: none;
+          position: relative;
+          .tag {
+            display: block;
+            color: #FFF;
+            padding: 10px;
+            text-decoration: none;
+            .fa {
+              margin-right: 10px;
+              color: $white-color;
+            }
+          }
+          .tag-action {
+            display: none;
+            font-size: 16px;
+            a {
+              color: $white-color;
+              margin-right: 10px;
+            }
+          }
+          &:hover {
+            background: $dark-bg;
+            .tag-action {
+              display: block;
+              position: absolute;
+              top:  8px;
+              right: 0;
+            }
+          }
+        }
+      }
+      input[type=text] {
+        border: none;
+        background-color: rgba(0, 0, 0, .5);
+        color: #FFF;
+      }
+    }
+  }
+
+  #repo-tags {
+    .modal-dialog {
+      width: 400px;
+    }
   }
 
   #nav {
@@ -184,12 +269,20 @@ $white-color: rgba(255, 255, 255, .75);
           overflow: hidden;
         }
 
-        .repo-stats span {
-          margin-right: 2em;
-          color: #39548B;
-          font-weight: bold;
+        .repo-stats {
           font-size: 12px;
-          .fa {
+          span {
+            font-weight: bold;
+          }
+          span, a {
+            margin-right: 2em;
+            color: #39548B;
+            .fa {
+              margin-right: 0.5em;
+            }
+          }
+          a .tag {
+            font-style: normal;
             margin-right: 0.5em;
           }
         }

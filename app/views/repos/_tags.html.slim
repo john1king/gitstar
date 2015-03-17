@@ -1,0 +1,7 @@
+= fa_icon "tag"
+- has_tag = false
+- @tags.each do |tag|
+    - has_tag = true
+    i.tag = tag.name
+- unless has_tag
+  | 编辑标签
