@@ -140,6 +140,10 @@ $dark-bg: rgba(0, 0, 0, .25);
       padding: 0 8px;
     }
 
+    .active {
+      background: $dark-bg;
+    }
+
     #tags {
       .title {
         font-size: 16px;
