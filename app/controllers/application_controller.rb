@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
       @user = current_user
     else
       respond_to do |format|
-        format.html {redirect_to signin_url}
+        format.html {redirect_to login_url}
         format.js { render text: 'alert("请登录")'}
       end
     end
