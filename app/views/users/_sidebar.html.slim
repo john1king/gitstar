@@ -1,4 +1,8 @@
 #sidebar
+  a.all-repos href=repos_path data-remote="true"
+    = fa_icon "inbox"
+    | 全部
+    span.counter = @user.stars_count
   #tags
     .title
       | 标签

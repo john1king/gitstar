@@ -2,7 +2,7 @@ li id="tag-#{tag.id}"
   a.tag href=repos_path(tag_id: tag.id) data-remote="true"
     = fa_icon 'tag'
     = tag.name
-    span = tag.stars_count
+    span.counter = tag.stars_count
   span.tag-action
     a href=edit_tag_path(tag) data-remote="true"
       = fa_icon 'pencil'

@@ -118,11 +118,32 @@ $dark-bg: rgba(0, 0, 0, .25);
     width: $sidebar-width;
     background: $bg-color;
     color: #FFF;
+    .all-repos {
+      display: block;
+      font-size: 16px;
+      padding: 10px;
+      border-bottom: 1px solid $white-color;
+      color: #FFF;
+      text-decoration: none;
+      .fa {
+        margin-right:  10px;
+      }
+    }
+
+    .counter {
+      font-size: 12px;
+      color: $white-color;
+      background: $dark-bg;
+      display: inline-block;
+      margin-left: 10px;
+      border-radius: 10px;
+      padding: 0 8px;
+    }
 
     #tags {
       .title {
         font-size: 16px;
-        padding: 10px 10px 5px;
+        padding: 10px;
         border-bottom: 1px solid $white-color;
         a {
           color: #FFF;
@@ -143,15 +164,6 @@ $dark-bg: rgba(0, 0, 0, .25);
             .fa {
               margin-right: 10px;
               color: $white-color;
-            }
-            span {
-              font-size: 12px;
-              color: $white-color;
-              background: $dark-bg;
-              display: inline-block;
-              margin-left: 10px;
-              border-radius: 10px;
-              padding: 0 8px;
             }
           }
           .tag-action {
