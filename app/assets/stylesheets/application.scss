@@ -1,0 +1,336 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap";
+@import "font-awesome";
+@import "github-markdown";
+
+$sidebar-width: 240px;
+$nav-height: 60px;
+$repo-list-width: 400px;
+$border-color: #EEF1F5;
+$font-color: #7B7D82;
+$bg-color: #242E41;
+$white-color: rgba(255, 255, 255, .75);
+$dark-bg: rgba(0, 0, 0, .25);
+
+.layout {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+}
+
+.home-page {
+  height: 100%;
+  body {
+    background-color: $bg-color;
+    background-image: url('stars-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: $white-color;
+    font-size: 16px;
+    height: 100%;
+
+    display: -webkit-flex;
+    -webkit-align-items: center;
+    -webkit-justify-content: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .summary {
+      text-align: center;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 24px;
+    }
+
+    .btn-login {
+      margin: 20px 0;
+      color: $white-color;
+      display: inline-block;
+      border: 2px solid $white-color;
+      border-radius: 25px;
+      padding: 3px 5px;
+      padding-right: 1em;
+
+      i {
+        font-size: 40px;
+        vertical-align: middle;
+      }
+      span {
+        font-size: 16px;
+        display: inline-block;
+        margin: 0 5px 0 10px;
+        vertical-align: middle;
+      }
+    }
+
+    .links {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      a {
+        display: inline-block;
+        color: $white-color;
+        border: 2px solid $white-color;
+        border-radius: 15px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        margin-left: 10px;
+        text-align: center;
+        vertical-align: middle;
+        opacity: .5;
+        i {
+          font-size: 20px;
+        }
+      }
+
+    }
+  }
+}
+
+.stars-page {
+
+  #sidebar {
+    @extend .layout;
+    right: auto;
+    width: $sidebar-width;
+    background: $bg-color;
+    color: #FFF;
+    .all-stars {
+      display: block;
+      font-size: 16px;
+      padding: 10px;
+      border-bottom: 1px solid $white-color;
+      color: #FFF;
+      text-decoration: none;
+      .fa {
+        margin-right:  10px;
+      }
+    }
+
+    .counter {
+      font-size: 12px;
+      color: $white-color;
+      background: $dark-bg;
+      display: inline-block;
+      margin-left: 10px;
+      border-radius: 10px;
+      padding: 0 8px;
+    }
+
+    .active {
+      background: $dark-bg;
+    }
+
+    #tags {
+      .title {
+        font-size: 16px;
+        padding: 10px;
+        border-bottom: 1px solid $white-color;
+        a {
+          color: #FFF;
+          float: right;
+        }
+      }
+      ul {
+        padding: 0;
+        margin: 0;
+        li {
+          list-style: none;
+          position: relative;
+          .tag {
+            display: block;
+            color: #FFF;
+            padding: 10px;
+            text-decoration: none;
+            .fa {
+              margin-right: 10px;
+              color: $white-color;
+            }
+          }
+          .tag-action {
+            display: none;
+            font-size: 16px;
+            a {
+              color: $white-color;
+              margin-right: 10px;
+            }
+          }
+          &:hover {
+            background: $dark-bg;
+            .tag-action {
+              display: block;
+              position: absolute;
+              top:  8px;
+              right: 0;
+            }
+          }
+        }
+      }
+      input[type=text] {
+        border: none;
+        background-color: rgba(0, 0, 0, .5);
+        color: #FFF;
+      }
+    }
+  }
+
+  #star-tags {
+    .modal-dialog {
+      width: 400px;
+    }
+  }
+
+  #nav {
+    @extend .layout;
+    position: absolute;
+    left: $sidebar-width;
+    height: $nav-height;
+    border-bottom: 1px solid $border-color;
+    .nav {
+      height: $nav-height;
+      margin-right: 2em;
+      color: $font-color;
+      & > li {
+        margin-top: ($nav-height - 48)/2;
+      }
+      .dropdown-toggle {
+        cursor: pointer;
+      }
+      .username {
+        margin: 0 1em;
+      }
+    }
+  }
+
+  #stars {
+    @extend .layout;
+    top: $nav-height;
+    left: $sidebar-width;
+    width: $repo-list-width;
+    overflow-y: auto;
+    border-right: 1px solid $border-color;
+
+    ul {
+      padding: 0;
+      margin: 0;
+
+      li {
+        list-style: none;
+        padding: 15px 20px;
+        border-bottom: 1px solid $border-color;
+
+        h3 {
+          margin: 0 0 10px 0;
+          font-size: 16px;
+
+          .owner, .slash  {
+            color: #5D9B9B;
+            font-weight: normal;
+          }
+          .slash {
+            margin-left: -2px;
+            margin-right: -2px;
+            &:before, &:after  {
+              content: ' ';
+            }
+          }
+          a {
+            color: #009C9E;
+          }
+        }
+
+        p {
+          color: $font-color;
+          line-height: 20px;
+          max-height: 60px;
+          overflow: hidden;
+        }
+
+        .repo-stats {
+          font-size: 12px;
+          span {
+            font-weight: bold;
+          }
+          span, a {
+            margin-right: 2em;
+            color: #39548B;
+            .fa {
+              margin-right: 0.5em;
+            }
+          }
+          a .tag {
+            font-style: normal;
+            margin-right: 0.5em;
+          }
+        }
+      }
+    }
+
+    .next {
+      display: none;
+    }
+  }
+
+  #readme-container {
+    @extend .layout;
+    padding: 20px;
+    overflow-y: auto;
+    top: $nav-height;
+    left: $sidebar-width + $repo-list-width;
+  }
+
+}
+
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  margin: 10px auto;
+  background-color: #333;
+
+  border-radius: 100%;
+  -webkit-animation: scaleout 1.0s infinite ease-in-out;
+  animation: scaleout 1.0s infinite ease-in-out;
+}
+
+@-webkit-keyframes scaleout {
+  0% { -webkit-transform: scale(0.0) }
+  100% {
+    -webkit-transform: scale(1.0);
+    opacity: 0;
+  }
+}
+
+@keyframes scaleout {
+  0% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 100% {
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+    opacity: 0;
+  }
+}

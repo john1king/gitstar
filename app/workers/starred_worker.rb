@@ -13,6 +13,7 @@ class StarredWorker
       data.each { |star|
         repo = Repo.create_from_github(star[:repo])
         @user.star_repo(repo, star[:starred_at], last_updated)
+        ReadmeWorker.perform_async(repo.id)
       }
     end
     @user.unstar_deleted_repo(last_updated)

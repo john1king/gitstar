@@ -1,0 +1,3 @@
+$('#star-tags').modal('hide');
+$('#tags ul').html("<%= j render @user.tags %>");
+$("#repo-<%= @star.repo.id %>").find('.edit-tag').html('<%= j render "tags" %>');

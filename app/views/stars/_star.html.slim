@@ -1,0 +1,23 @@
+- repo = star.repo
+li id="repo-#{repo.id}" data-readme-url=readme_repo_path(repo)
+  h3
+    a href=repo.html_url target="_blank"
+      span.owner = repo.owner
+      span.slash = '/'
+      = repo.name
+  p = repo.description
+  .repo-stats
+    span
+      = fa_icon 'star'
+      = repo.origin_stargazers_count
+    span
+      = fa_icon 'code-fork'
+      = repo.forks_count
+    a.edit-tag href=edit_tag_star_path(star) data-remote="true"
+      = fa_icon 'tag'
+      - if star.tags.present?
+        - star.tags.each do |tag|
+          i.tag = tag.name
+      - else
+        | 编辑标签
+

@@ -1,0 +1,6 @@
+= fa_icon "tag"
+- if @star.tags.present?
+  - @star.tags.each do |tag|
+      i.tag = tag.name
+- else
+  | 编辑标签

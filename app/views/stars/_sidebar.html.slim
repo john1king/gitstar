@@ -1,0 +1,12 @@
+#sidebar
+  a.all-stars href=stars_path(format: :js) data-remote="true"
+    = fa_icon "inbox"
+    | 全部
+    span.counter = @user.stars_count
+  #tags
+    .title
+      | 标签
+      a href=new_tag_path data-remote="true"
+        = fa_icon "plus"
+    ul
+      = render @tags

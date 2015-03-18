@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150212025413) do
+ActiveRecord::Schema.define(version: 20150315145629) do
 
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider",   limit: 255
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(version: 20150212025413) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "readmes", force: :cascade do |t|
+    t.integer "repo_id",    limit: 4,                     null: false
+    t.text    "content",    limit: 65535
+    t.boolean "is_loading", limit: 1,     default: false
+  end
+
+  add_index "readmes", ["repo_id"], name: "index_readmes_on_repo_id", unique: true, using: :btree
 
   create_table "repos", force: :cascade do |t|
     t.string   "description",             limit: 1000
@@ -47,9 +55,23 @@ ActiveRecord::Schema.define(version: 20150212025413) do
   add_index "stars", ["starred_at"], name: "index_stars_on_starred_at", using: :btree
   add_index "stars", ["user_id", "repo_id"], name: "index_stars_on_user_id_and_repo_id", unique: true, using: :btree
 
+  create_table "stars_tags", id: false, force: :cascade do |t|
+    t.integer "tag_id",  limit: 4, null: false
+    t.integer "star_id", limit: 4, null: false
+  end
+
+  add_index "stars_tags", ["tag_id", "star_id"], name: "index_stars_tags_on_tag_id_and_star_id", using: :btree
+
+  create_table "tags", force: :cascade do |t|
+    t.string  "name",        limit: 255
+    t.integer "user_id",     limit: 4
+    t.integer "stars_count", limit: 4,   default: 0
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "email",       limit: 255
+    t.string   "avatar_url",  limit: 255
     t.integer  "stars_count", limit: 4,   default: 0
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false

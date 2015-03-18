@@ -1,6 +1,8 @@
 class Repo < ActiveRecord::Base
   has_many :stars, -> { where(active: true).order(starred_at: :desc) }
   has_many :users, through: :stars
+  has_one :readme
+
   GITHUB_COLUMNS = %i(
     full_name
     description
@@ -23,6 +25,14 @@ class Repo < ActiveRecord::Base
   def self.ensure_column_name(name)
     column = "origin_#{name}"
     column.in?(column_names) ? column.to_sym : name
+  end
+
+  def owner
+    full_name.split('/')[0]
+  end
+
+  def name
+    full_name.split('/')[1]
   end
 
 end
