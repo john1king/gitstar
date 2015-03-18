@@ -1,1 +1,5 @@
-$("#tag-<%= @tag.id %>").html('<%= j render "form" %>').find('input[type=text]').focusEnd()
+;(function(){
+  var $tag = $("#tag-<%= @tag.id %>");
+  var html = $tag.html();
+  $tag.html('<div class="origin">' + html + '</div>' + '<%= j render "form" %>').find('input[type=text]').focusEnd()
+})();
