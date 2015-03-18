@@ -1,5 +1,5 @@
 li id="tag-#{tag.id}"
-  a.tag href=stars_path(tag_id: tag.id, format: :js) data-remote="true"
+  a.tag.item href=stars_path(tag_id: tag.id, format: :js) data-remote="true"
     = fa_icon 'tag'
     = tag.name
     span.counter = tag.stars_count

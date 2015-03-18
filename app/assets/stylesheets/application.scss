@@ -23,7 +23,12 @@ $nav-height: 60px;
 $repo-list-width: 400px;
 $border-color: #EEF1F5;
 $font-color: #7B7D82;
-$bg-color: #242E41;
+$bg-color: #252F40;
+$sidebar-icon: #92BCBD;
+$sidebar-text: #DEF7F7;
+$sidebar-border: #101D20;
+$sidebar-active: #11494B;
+$sidebar-hover: #0A595C;
 $white-color: rgba(255, 255, 255, .75);
 $dark-bg: rgba(0, 0, 0, .25);
 
@@ -117,17 +122,21 @@ $dark-bg: rgba(0, 0, 0, .25);
     right: auto;
     width: $sidebar-width;
     background: $bg-color;
-    color: #FFF;
-    .all-stars {
+    color: $sidebar-text;
+    a {
+      color: $sidebar-text;
+    }
+    .fa {
+      color: $sidebar-icon;
+      margin-right:  10px;
+    }
+
+    .item {
       display: block;
-      font-size: 16px;
       padding: 10px;
-      border-bottom: 1px solid $white-color;
-      color: #FFF;
+      border-bottom: 1px solid $sidebar-border;
+      color: $sidebar-text;
       text-decoration: none;
-      .fa {
-        margin-right:  10px;
-      }
     }
 
     .counter {
@@ -141,51 +150,29 @@ $dark-bg: rgba(0, 0, 0, .25);
     }
 
     .active {
-      background: $dark-bg;
+      background: $sidebar-active;
+    }
+
+    .item:hover {
+      background: $sidebar-hover;
     }
 
     #tags {
-      .title {
-        font-size: 16px;
-        padding: 10px;
-        border-bottom: 1px solid $white-color;
-        a {
-          color: #FFF;
-          float: right;
-        }
-      }
       ul {
         padding: 0;
         margin: 0;
         li {
           list-style: none;
           position: relative;
-          .tag {
-            display: block;
-            color: #FFF;
-            padding: 10px;
-            text-decoration: none;
-            .fa {
-              margin-right: 10px;
-              color: $white-color;
-            }
-          }
           .tag-action {
             display: none;
             font-size: 16px;
-            a {
-              color: $white-color;
-              margin-right: 10px;
-            }
           }
-          &:hover {
-            background: $dark-bg;
-            .tag-action {
-              display: block;
-              position: absolute;
-              top:  8px;
-              right: 0;
-            }
+          &:hover  .tag-action {
+            display: block;
+            position: absolute;
+            top:  8px;
+            right: 0;
           }
         }
       }
