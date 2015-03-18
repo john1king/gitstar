@@ -1,4 +1,8 @@
 ;(function(){
+  $('#tags').find('.origin').each(function(){
+    $(this).parent().html($(this).html());
+  });
+  $('#tags .new-tag').remove();
   var $tag = $("#tag-<%= @tag.id %>");
   var html = $tag.html();
   $tag.html('<div class="origin">' + html + '</div>' + '<%= j render "form" %>').find('input[type=text]').focusEnd()
