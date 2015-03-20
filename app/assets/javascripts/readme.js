@@ -7,10 +7,7 @@ $(function(){
       lastReadmeUrl = readmeUrl;
       $.ajax({
         url: readmeUrl,
-        dataType: 'script',
-        success: function(){
-          console.log('success!')
-        }
+        dataType: 'script'
       })
     }
   });
