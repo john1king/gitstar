@@ -181,11 +181,17 @@ $dark-bg: rgba(0, 0, 0, .25);
             display: none;
             font-size: 16px;
           }
-          &:hover  .tag-action {
+          &:hover .tag-action {
             display: block;
             position: absolute;
             top:  8px;
             right: 0;
+          }
+        }
+        .dropable {
+          .counter {
+            background: #04BB07;
+            font-weight: bold;
           }
         }
       }
@@ -261,6 +267,7 @@ $dark-bg: rgba(0, 0, 0, .25);
       margin: 0;
 
       li {
+        background: #FFF;
         list-style: none;
         padding: 15px 20px;
         border-bottom: 1px solid $border-color;
