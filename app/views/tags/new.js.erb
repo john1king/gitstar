@@ -1,2 +1,9 @@
-$("#tags ul").append('<li class="new-tag"><%= j render "form" %></li>').find('input[type=text]').focus()
-
+;(function(){
+  if ($('#tags .new-tag').length){
+    return;
+  };
+  $('#tags').find('.origin').each(function(){
+    $(this).parent().html($(this).html());
+  });
+  $("#tags ul").append('<li class="new-tag"><%= j render "form" %></li>').find('input[type=text]').focus()
+})();

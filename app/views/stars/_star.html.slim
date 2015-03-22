@@ -1,5 +1,5 @@
 - repo = star.repo
-li id="repo-#{repo.id}" data-readme-url=readme_repo_path(repo)
+li id="repo-#{repo.id}" data-readme-url=readme_repo_path(repo) data-star-id=star.id draggable="true"
   h3
     a href=repo.html_url target="_blank"
       span.owner = repo.owner

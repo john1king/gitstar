@@ -22,7 +22,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :tags
+  resources :tags do
+    member do
+      post :add_star
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
