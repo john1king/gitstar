@@ -1,1 +1,4 @@
-$("#tag-<%= @tag.id %>").replaceWith('<%= j render @tag %>')
+;(function(){
+  $('#tag-<%= @tag.id %>').replaceWith('<%= j render @tag %>');
+  $('#stars .tag[data-tag-id=<%= @tag.id %>]').text('<%= @tag.name %>');
+})();
