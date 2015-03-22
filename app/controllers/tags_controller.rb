@@ -32,7 +32,7 @@ class TagsController < ApplicationController
     @tag = @user.tags.find(params[:id])
     @star = @user.stars.find(params[:star_id])
     @tag.stars << @star unless @tag.stars.include? @star
-    respond_to_ujs { render 'tags/update.js' }
+    respond_to_ujs
   end
 
   private
