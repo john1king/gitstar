@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
-  require 'sidekiq/web'
-  mount Sidekiq::Web => '/sidekiq'
+  if Rails.env.development?
+    require 'sidekiq/web'
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   root 'sessions#index'
   get '/login', to: 'sessions#new', as: :login
