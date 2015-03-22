@@ -1,1 +1,4 @@
-$("#tag-<%= @tag.id %>").remove()
+;(function(){
+  $('#tag-<%= @tag.id %>').remove();
+  $('#stars .tag[data-tag-id=<%= @tag.id %>]').remove();
+})();

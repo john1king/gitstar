@@ -18,6 +18,4 @@ li id="repo-#{repo.id}" data-readme-url=readme_repo_path(repo) data-star-id=star
       - if star.tags.present?
         - star.tags.each do |tag|
           i.tag data-tag-id=tag.id = tag.name
-      - else
-        | 编辑标签
 
