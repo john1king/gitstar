@@ -1,1 +1,10 @@
-$('#star-tags').html('<%= j render "tag_form" %>').modal().find('input[type=text]').focusEnd()
+;(function(){
+  $('#star-tags')
+    .html('<%= j render "tag_form" %>')
+    .modal()
+    .find('.tm-input')
+      .tagsManager({
+        prefilled: <%= raw @tags.map(&:name).to_json %>
+      })
+      .focus();
+})();
