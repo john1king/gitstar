@@ -4,7 +4,9 @@
     .modal()
     .find('.tm-input')
       .tagsManager({
-        prefilled: <%= raw @tags.map(&:name).to_json %>
+        prefilled: <%= raw @tags.map(&:name).to_json %>,
+        AjaxPush: '<%= j update_tag_star_path(@star) %>',
+        AjaxPushAllTags: true
       })
       .focus();
 })();

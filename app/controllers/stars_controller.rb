@@ -59,10 +59,7 @@ class StarsController < ApplicationController
   end
 
   def tag_names
-    names = params['hidden-tags'].split(',').map(&:strip).delete_if(&:empty?)
-    tag = params['tags'].strip
-    names << tag if tag.present?
-    names
+    params[:tags].split(',').map(&:strip).delete_if(&:empty?)
   end
 
 end
