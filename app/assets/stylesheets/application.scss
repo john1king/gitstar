@@ -17,14 +17,21 @@
 @import "bootstrap";
 @import "font-awesome";
 @import "github-markdown";
+@import "tagmanager";
 
 $sidebar-width: 240px;
 $nav-height: 60px;
 $repo-list-width: 400px;
 $border-color: #EEF1F5;
 $font-color: #7B7D82;
-$bg-color: #242E41;
+$bg-color: #252F40;
+$sidebar-icon: #92BCBD;
+$sidebar-text: #DEF7F7;
+$sidebar-border: #101D20;
+$sidebar-active: #11494B;
+$sidebar-hover: #0A595C;
 $white-color: rgba(255, 255, 255, .75);
+$white-bg: rgba(255, 255, 255, .1);
 $dark-bg: rgba(0, 0, 0, .25);
 
 .layout {
@@ -73,6 +80,11 @@ $dark-bg: rgba(0, 0, 0, .25);
       padding: 3px 5px;
       padding-right: 1em;
 
+      &:hover {
+        box-shadow: 0 0 1em $white-color;
+        background: $white-bg;
+      }
+
       i {
         font-size: 40px;
         vertical-align: middle;
@@ -101,6 +113,11 @@ $dark-bg: rgba(0, 0, 0, .25);
         text-align: center;
         vertical-align: middle;
         opacity: .5;
+        &:hover {
+          opacity: 1;
+          box-shadow: 0 0 1em $white-color;
+          background: $white-bg;
+        }
         i {
           font-size: 20px;
         }
@@ -117,19 +134,25 @@ $dark-bg: rgba(0, 0, 0, .25);
     right: auto;
     width: $sidebar-width;
     background: $bg-color;
-    color: #FFF;
-    .all-stars {
-      display: block;
-      font-size: 16px;
-      padding: 10px;
-      border-bottom: 1px solid $white-color;
-      color: #FFF;
-      text-decoration: none;
-      .fa {
-        margin-right:  10px;
-      }
+    color: $sidebar-text;
+    a {
+      color: $sidebar-text;
+    }
+    .fa {
+      color: $sidebar-icon;
+      margin-right:  10px;
     }
 
+    .item {
+      display: block;
+      padding: 10px;
+      border-bottom: 1px solid $sidebar-border;
+      color: $sidebar-text;
+      text-decoration: none;
+    }
+    .origin {
+      display: none;
+    }
     .counter {
       font-size: 12px;
       color: $white-color;
@@ -141,58 +164,46 @@ $dark-bg: rgba(0, 0, 0, .25);
     }
 
     .active {
-      background: $dark-bg;
+      background: $sidebar-active;
+    }
+
+    .item:hover {
+      background: $sidebar-hover;
     }
 
     #tags {
-      .title {
-        font-size: 16px;
-        padding: 10px;
-        border-bottom: 1px solid $white-color;
-        a {
-          color: #FFF;
-          float: right;
-        }
-      }
       ul {
         padding: 0;
         margin: 0;
         li {
           list-style: none;
           position: relative;
-          .tag {
-            display: block;
-            color: #FFF;
-            padding: 10px;
-            text-decoration: none;
-            .fa {
-              margin-right: 10px;
-              color: $white-color;
-            }
-          }
           .tag-action {
             display: none;
             font-size: 16px;
-            a {
-              color: $white-color;
-              margin-right: 10px;
-            }
           }
-          &:hover {
-            background: $dark-bg;
-            .tag-action {
-              display: block;
-              position: absolute;
-              top:  8px;
-              right: 0;
-            }
+          &:hover .tag-action {
+            display: block;
+            position: absolute;
+            top:  8px;
+            right: 0;
+          }
+        }
+        .dropable {
+          .counter {
+            background: #04BB07;
+            font-weight: bold;
           }
         }
       }
-      input[type=text] {
+      .form-control {
         border: none;
-        background-color: rgba(0, 0, 0, .5);
-        color: #FFF;
+        border-radius: 0;
+        width: 190px;
+      }
+      .btn {
+        width: 50px;
+        border-radius: 0;
       }
     }
   }
@@ -209,6 +220,25 @@ $dark-bg: rgba(0, 0, 0, .25);
     left: $sidebar-width;
     height: $nav-height;
     border-bottom: 1px solid $border-color;
+    background: #FAFAFA;
+    .navbar-form {
+      button {
+        color: #666;
+        padding: 0;
+        margin-left: -24px;
+        display: inline-block;
+        border: none;
+        background: none;
+      }
+      .form-control {
+        width: 370px;
+        border-radius: 17px;
+        background: #CCC;
+        &:focus {
+          background: #FFF;
+        }
+      }
+    }
     .nav {
       height: $nav-height;
       margin-right: 2em;
@@ -238,6 +268,7 @@ $dark-bg: rgba(0, 0, 0, .25);
       margin: 0;
 
       li {
+        background: #FFF;
         list-style: none;
         padding: 15px 20px;
         border-bottom: 1px solid $border-color;
@@ -302,6 +333,20 @@ $dark-bg: rgba(0, 0, 0, .25);
     left: $sidebar-width + $repo-list-width;
   }
 
+}
+
+#star-tags {
+  .tm-input {
+    padding: 4px 6px;
+    width: 9em;
+    border-radius: 4px;
+    background: #FFF;
+    border: 1px solid #CCC;
+  }
+  button {
+    padding: 4px 6px;
+    margin: 0 0 5px 5px;
+  }
 }
 
 

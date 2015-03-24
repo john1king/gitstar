@@ -15,5 +15,6 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require jquery.waypoints
+//= require tagmanager
 //= require ./jquery_plugin
 //= require_tree .

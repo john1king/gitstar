@@ -20,7 +20,7 @@ class StarsController < ApplicationController
 
   def update_tag
     @star = @user.stars.find(params[:id])
-    @star.tags = params[:tag_names].split.map do |name|
+    @star.tags = tag_names.map do |name|
       @user.tags.find_or_create_by(name: name)
     end
     respond_to_ujs
@@ -56,6 +56,10 @@ class StarsController < ApplicationController
   def fetch_int(key, default)
     value = params[key].to_i
     value.zero? ? default : value
+  end
+
+  def tag_names
+    params[:tags].split(',').map(&:strip).delete_if(&:empty?)
   end
 
 end

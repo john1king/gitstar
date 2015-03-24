@@ -30,9 +30,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def respond_to_ujs
+  def respond_to_ujs(&blk)
     respond_to do |format|
-      format.js
+      format.js &blk
     end
   end
 

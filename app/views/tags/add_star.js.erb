@@ -1,4 +1,4 @@
 ;(function(){
   $('#tag-<%= @tag.id %>').replaceWith('<%= j render @tag %>');
-  $('#stars .tag[data-tag-id=<%= @tag.id %>]').text('<%= @tag.name %>');
+  $('#repo-<%= @star.repo.id %>').replaceWith('<%= j render @star %>');
 })();
