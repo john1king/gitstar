@@ -10,10 +10,13 @@ class ReadmeWorker
     rescue  ActiveRecord::RecordNotUnique
       return
     end
-    content = Octokit.readme repo.full_name, accept: HTML_MEDIA_TYPE
-    readme.update_attribute :content, content
+    readme.update_attribute :content, read_content(repo.full_name)
   end
 
   private
+
+  def read_content(name)
+    content = Octokit.readme name, accept: HTML_MEDIA_TYPE
+  end
 
 end
