@@ -58,3 +58,6 @@ group :development, :test do
   gem 'spring'
 end
 
+group :test do
+  gem 'mocha'
+end
