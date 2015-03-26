@@ -5,24 +5,32 @@ class StarredWorker
 
   def perform(user_id, access_token)
     @user = User.find(user_id)
-    @client = Octokit::Client.new(access_token: access_token)
+    @access_token = access_token
     return if not_updated?
     last_updated = DateTime.now
-    list_starred_batch(100)
-    paginate @client.last_response do |data|
-      data.each { |star|
-        repo = Repo.create_from_github(star[:repo])
-        @user.star_repo(repo, star[:starred_at], last_updated)
-        ReadmeWorker.perform_async(repo.id)
-      }
+    each(100) do |star|
+      repo = Repo.create_from_github(star[:repo])
+      @user.star_repo(repo, star[:starred_at], last_updated)
+      fetch_readme repo.id
     end
     @user.unstar_deleted_repo(last_updated)
   end
 
   private
 
+  def client
+    @client ||= Octokit::Client.new(access_token: @access_token)
+  end
+
   def list_starred_batch(per_page=30)
-    @client.starred(nil, per_page: per_page, accept: STARRED_MEDIA_TYPE)
+    client.starred(nil, per_page: per_page, accept: STARRED_MEDIA_TYPE)
+  end
+
+  def each(per_page, &blk)
+    list_starred_batch(per_page)
+    paginate client.last_response do |data|
+      data.each(&blk)
+    end
   end
 
   def paginate(response)
@@ -41,7 +49,7 @@ class StarredWorker
     @user.stars_count == starred_count &&
       # 数据正确的情况下，count 相等就不会只有其中一者为 nil，下面一行的判断可删除
       (star.nil? && github_star.nil?) ||
-        (star.present? && star.present? &&
+        (star.present? && github_star.present? &&
          star.id == github_star[:repo][:id] &&
          star.starred_at == github_star[:starred_at])
   end
@@ -54,6 +62,10 @@ class StarredWorker
     else
       @client.last_response.data.size
     end
+  end
+
+  def fetch_readme(repo_id)
+    ReadmeWorker.perform_async(repo_id)
   end
 
 end
