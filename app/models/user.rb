@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   end
 
   def unstar_deleted_repo(last_updated)
-    stars.where('last_updated < ?', last_updated).update_all(active: false)
+    stars.where('last_updated < ?', last_updated.utc.to_formatted_s(:db)).update_all(active: false)
   end
 
 end

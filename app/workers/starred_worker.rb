@@ -6,7 +6,7 @@ class StarredWorker
   def perform(user_id, access_token)
     @user = User.find(user_id)
     @access_token = access_token
-    return if not_updated?
+    return false if not_updated?
     last_updated = DateTime.now
     each(100) do |star|
       repo = Repo.create_from_github(star[:repo])
@@ -14,6 +14,7 @@ class StarredWorker
       fetch_readme repo.id
     end
     @user.unstar_deleted_repo(last_updated)
+    true
   end
 
   private
@@ -43,24 +44,35 @@ class StarredWorker
   end
 
   def not_updated?
-    github_star = list_starred_batch(1).first
     star = @user.stars.first
-    # 注意 starred_count 必须在 list_starred_batch(1) 之后调用
-    @user.stars_count == starred_count &&
+    @user.stars_count == starred_count && (
       # 数据正确的情况下，count 相等就不会只有其中一者为 nil，下面一行的判断可删除
-      (star.nil? && github_star.nil?) ||
-        (star.present? && github_star.present? &&
-         star.id == github_star[:repo][:id] &&
-         star.starred_at == github_star[:starred_at])
+      (star.nil? && last_starred.nil?) ||
+        (star.present? && last_starred.present? &&
+         star.repo.id == last_starred[:repo][:id] &&
+         star.starred_at == last_starred[:starred_at])
+    )
+  end
+
+  def last_starred
+    return @last_starred if defined? @last_starred
+    last_starred_and_total_count
+    @last_starred
   end
 
   def starred_count
     return @starred_count if defined? @starred_count
-    last_page = @client.last_response.rels[:last]
+    last_starred_and_total_count
+    @starred_count
+  end
+
+  def last_starred_and_total_count
+    @last_starred = list_starred_batch(1).first
+    last_page = client.last_response.rels[:last]
     if last_page
-      /\bpage=(\d+)/.match(last_page.href)[1].to_i
+      @starred_count = /\bpage=(\d+)/.match(last_page.href)[1].to_i
     else
-      @client.last_response.data.size
+      @starred_count = client.last_response.data.size
     end
   end
 

@@ -1,0 +1,13 @@
+hs_ruby:
+  user: has_stars
+  repo: ruby
+  starred_at: 2015-01-01 00:00:01
+  active: yes
+  last_updated: 2015-01-02 00:00:00
+hs_python:
+  user: has_stars
+  repo: python
+  starred_at: 2015-01-01 00:00:00
+  active: yes
+  last_updated: 2015-01-02 00:00:00
+
