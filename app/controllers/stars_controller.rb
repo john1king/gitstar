@@ -39,7 +39,7 @@ class StarsController < ApplicationController
     end
     @stars =  @stars.offset((page_params[:page] - 1)*page_params[:per]).limit(page_params[:per])
     @stars = @stars.includes(:repo, :tags)
-     if (@page = page_params[:page]) * page_params[:per] < total
+    if (@page = page_params[:page]) * page_params[:per] < total
       next_page_params = page_params.dup.tap do |qs|
         qs[:page] += 1
         qs[:format] = :js

@@ -11,4 +11,17 @@ class TagTest < ActiveSupport::TestCase
     assert_equal 1, tags(:has_stars).stars_count
   end
 
+  test 'valid tag name' do
+    ['f', 'foo', 'foo bar', '标签', 'x'*29].each do |name|
+      tag = Tag.new(name: name)
+      assert tag.valid?
+    end
+  end
+
+  test 'invalid tag name' do
+    ['', 'foo,bar', 'x'*31].each do |name|
+      tag = Tag.new(name: name)
+      refute tag.valid?
+    end
+  end
 end
