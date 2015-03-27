@@ -1,13 +1,30 @@
-hs_ruby:
+has_ruby:
   user: has_stars
   repo: ruby
   starred_at: 2015-01-01 00:00:01
   active: yes
   last_updated: 2015-01-02 00:00:00
-hs_python:
+has_python:
   user: has_stars
   repo: python
   starred_at: 2015-01-01 00:00:00
   active: yes
   last_updated: 2015-01-02 00:00:00
-
+tag_ruby:
+  user: tag_stars
+  repo: ruby
+  starred_at: 2015-01-01 00:00:01
+  active: no
+  last_updated: 2015-01-02 00:00:00
+tag_python:
+  user: tag_stars
+  repo: python
+  starred_at: 2015-01-01 00:00:00
+  active: yes
+  last_updated: 2015-01-02 00:00:00
+tag_js:
+  user: tag_stars
+  repo: js
+  starred_at: 2015-01-01 00:00:03
+  active: yes
+  last_updated: 2015-01-02 00:00:00

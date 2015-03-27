@@ -1,11 +1,16 @@
 <% %w(admin no_star).each do |name| %>
 <%= name %>:
   name: <%= name %>
-  email: admin@gitstar.com
+  email: <%= name %>@gitstar.com
   avatar_url: https://avatars0.githubusercontent.com/u/123?v=3&s=40
 <% end %>
 has_stars:
   name: has_stars
-  email: admin@gitstar.com
+  email: has_stars@gitstar.com
+  avatar_url: https://avatars0.githubusercontent.com/u/123?v=3&s=40
+  stars_count: 2
+tag_stars:
+  name: tag_stars
+  email: tag_stars@gitstar.com
   avatar_url: https://avatars0.githubusercontent.com/u/123?v=3&s=40
   stars_count: 2
