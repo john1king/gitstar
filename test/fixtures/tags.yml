@@ -1,0 +1,10 @@
+script:
+  user: tag_stars
+  name: script
+  stars_count: 2
+  stars: tag_ruby, tag_python, tag_js
+has_stars:
+  user: has_stars
+  name: has_stars
+  stars_count: 2
+  stars: has_ruby, has_python

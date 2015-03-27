@@ -29,11 +29,15 @@ class User < ActiveRecord::Base
   end
 
   def unstar_repo(repo)
-    stars.where(repo: repo).update_all(active: false)
+    star = stars.find_by(repo: repo)
+    if star
+      star.update(active: false)
+      star.tags.update_all('stars_count = stars_count - 1')
+    end
   end
 
   def unstar_deleted_repo(last_updated)
-    stars.where('last_updated < ?', last_updated).update_all(active: false)
+    stars.where('last_updated < ?', last_updated.utc.to_formatted_s(:db)).update_all(active: false)
   end
 
 end
