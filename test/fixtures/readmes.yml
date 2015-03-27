@@ -1,0 +1,9 @@
+python:
+  repo: python
+  is_loading: no
+  content: Python readme
+
+js:
+  repo: js
+  is_loading: yes
+  content: JavaScript readme
