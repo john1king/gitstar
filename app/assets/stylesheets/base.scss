@@ -1,0 +1,23 @@
+$sidebar-width: 240px;
+$nav-height: 60px;
+$repo-list-width: 400px;
+$border-color: #EEF1F5;
+$font-color: #7B7D82;
+$bg-color: #252F40;
+$sidebar-icon: #92BCBD;
+$sidebar-text: #DEF7F7;
+$sidebar-border: #101D20;
+$sidebar-active: #11494B;
+$sidebar-hover: #0A595C;
+$white-color: rgba(255, 255, 255, .75);
+$white-bg: rgba(255, 255, 255, .1);
+$dark-bg: rgba(0, 0, 0, .25);
+
+.layout {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+}

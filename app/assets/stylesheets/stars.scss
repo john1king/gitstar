@@ -1,0 +1,217 @@
+#sidebar {
+  @extend .layout;
+  right: auto;
+  width: $sidebar-width;
+  background: $bg-color;
+  color: $sidebar-text;
+  a {
+    color: $sidebar-text;
+  }
+  .fa {
+    color: $sidebar-icon;
+    margin-right:  10px;
+  }
+
+  .item {
+    display: block;
+    padding: 10px;
+    border-bottom: 1px solid $sidebar-border;
+    color: $sidebar-text;
+    text-decoration: none;
+  }
+  .origin {
+    display: none;
+  }
+  .counter {
+    font-size: 12px;
+    color: $white-color;
+    background: $dark-bg;
+    display: inline-block;
+    margin-left: 10px;
+    border-radius: 10px;
+    padding: 0 8px;
+  }
+
+  .active {
+    background: $sidebar-active;
+  }
+
+  .item:hover {
+    background: $sidebar-hover;
+  }
+
+  #tags {
+    ul {
+      padding: 0;
+      margin: 0;
+      li {
+        list-style: none;
+        position: relative;
+        .tag-action {
+          display: none;
+          font-size: 16px;
+        }
+        &:hover .tag-action {
+          display: block;
+          position: absolute;
+          top:  8px;
+          right: 0;
+        }
+      }
+      .dropable {
+        .counter {
+          background: #04BB07;
+          font-weight: bold;
+        }
+      }
+    }
+    .form-control {
+      border: none;
+      border-radius: 0;
+      width: 190px;
+    }
+    .btn {
+      width: 50px;
+      border-radius: 0;
+    }
+  }
+}
+
+#star-tags {
+  .modal-dialog {
+    width: 400px;
+  }
+}
+
+#nav {
+  @extend .layout;
+  position: absolute;
+  left: $sidebar-width;
+  height: $nav-height;
+  border-bottom: 1px solid $border-color;
+  background: #FAFAFA;
+  .navbar-form {
+    button {
+      color: #666;
+      padding: 0;
+      margin-left: -24px;
+      display: inline-block;
+      border: none;
+      background: none;
+    }
+    .form-control {
+      width: 370px;
+      border-radius: 17px;
+      background: #CCC;
+      &:focus {
+        background: #FFF;
+      }
+    }
+  }
+  .nav {
+    height: $nav-height;
+    margin-right: 2em;
+    color: $font-color;
+    & > li {
+      margin-top: ($nav-height - 48)/2;
+    }
+    .dropdown-toggle {
+      cursor: pointer;
+    }
+    .username {
+      margin: 0 1em;
+    }
+  }
+}
+
+#stars {
+  @extend .layout;
+  top: $nav-height;
+  left: $sidebar-width;
+  width: $repo-list-width;
+  overflow-y: auto;
+  border-right: 1px solid $border-color;
+
+  ul {
+    padding: 0;
+    margin: 0;
+
+    li {
+      background: #FFF;
+      list-style: none;
+      padding: 15px 20px;
+      border-bottom: 1px solid $border-color;
+
+      h3 {
+        margin: 0 0 10px 0;
+        font-size: 16px;
+
+        .owner, .slash  {
+          color: #5D9B9B;
+          font-weight: normal;
+        }
+        .slash {
+          margin-left: -2px;
+          margin-right: -2px;
+          &:before, &:after  {
+            content: ' ';
+          }
+        }
+        a {
+          color: #009C9E;
+        }
+      }
+
+      p {
+        color: $font-color;
+        line-height: 20px;
+        max-height: 60px;
+        overflow: hidden;
+      }
+
+      .repo-stats {
+        font-size: 12px;
+        span {
+          font-weight: bold;
+        }
+        span, a {
+          margin-right: 2em;
+          color: #39548B;
+          .fa {
+            margin-right: 0.5em;
+          }
+        }
+        a .tag {
+          font-style: normal;
+          margin-right: 0.5em;
+        }
+      }
+    }
+  }
+
+  .next {
+    display: none;
+  }
+}
+
+#readme-container {
+  @extend .layout;
+  padding: 20px;
+  overflow-y: auto;
+  top: $nav-height;
+  left: $sidebar-width + $repo-list-width;
+}
+
+#star-tags {
+  .tm-input {
+    padding: 4px 6px;
+    width: 9em;
+    border-radius: 4px;
+    background: #FFF;
+    border: 1px solid #CCC;
+  }
+  button {
+    padding: 4px 6px;
+    margin: 0 0 5px 5px;
+  }
+}
