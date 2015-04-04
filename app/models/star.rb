@@ -42,40 +42,59 @@ class Star < ActiveRecord::Base
     )
   end
 
-  def self.search(query, user_id, options = {})
-    options[:page] ||= 1
-    options[:per] ||= 30
-    query_opts = {
-      multi_match: {
-        query: query,
-        fields: ['repo.name^10', 'repo.owner', 'repo.description']
-      }
-    }
-    term_opts = {
-      'user.id' => user_id
-    }
-    term_opts['tags.name'] = options[:tag] if options[:tag]
+  def self.search(user_id, query, options = {})
     __elasticsearch__.search(
       {
-        query: {
-          filtered: {
-            query: query_opts,
-            filter: {
-              term: term_opts
-            }
-          }
-        },
+        query: query_and_filter_by(
+          query,
+          'user.id' => user_id,
+          'tags.name' => options[:tag],
+        ),
         highlight: {
           fields: {
             'repo.owner' => {},
             'repo.name' => {},
             'repo.description' => {},
           }
-        },
-        size: options[:per],
-        from: (options[:page] - 1) * options[:per]
-      }
+        }
+      }.merge search_result_page(options)
     )
+  end
+
+  def self.aggregate(user_id, query)
+    result = __elasticsearch__.search({
+      query: query_and_filter_by(query, 'user.id' => user_id),
+      aggs: {
+        tag_counts: {
+          terms: {
+            field: 'tags.name'
+          }
+        }
+      }
+    })
+    result.response['aggregations']['tag_counts']['buckets']
+  end
+
+  def self.search_result_page(options = {})
+    page = options[:page] || 1
+    per = options[:per] || 30
+    {size: per, from: (page - 1) * per}
+  end
+
+  def self.query_and_filter_by(query, filters = {})
+    {
+      filtered: {
+        query: {
+          multi_match: {
+            query: query,
+            fields: ['repo.name^10', 'repo.owner', 'repo.description']
+          }
+        },
+        filter: {
+          term: filters.select {|k, v| v.present? }
+        }
+      }
+    }
   end
 
 end

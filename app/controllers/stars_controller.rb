@@ -14,7 +14,7 @@ class StarsController < ApplicationController
   end
 
   def search
-    result = Star.search(params[:q], @user.id, page_params)
+    result = Star.search(@user.id, params[:q], page_params)
     @stars = result.records.includes(:user, :repo, :tags)
     @results = result.results
     next_page_url(@results.total, action: :search, q: params[:q])
