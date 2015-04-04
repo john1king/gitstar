@@ -1,6 +1,7 @@
 (function(){
   var html = '<%= j render @stars, format: :html %>';
   $('#stars .spinner').remove();
+  $('#stars .next').remove();
   <% if @page > 1 %>
     $('#stars ul').append(html);
   <% else%>

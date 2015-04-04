@@ -17,8 +17,8 @@ class StarsController < ApplicationController
     result = Star.search(params[:q], @user.id, page_params)
     @stars = result.records.includes(:user, :repo, :tags)
     @results = result.results
-    next_page_url(@results.total, q: params[:q])
-    respond_to_ujs { render 'index.js'}
+    next_page_url(@results.total, action: :search, q: params[:q])
+    respond_to_ujs { render 'index.js' }
   end
 
   def edit_tag
@@ -48,17 +48,17 @@ class StarsController < ApplicationController
     end
     @stars =  @stars.offset((page_params[:page] - 1)*page_params[:per]).limit(page_params[:per])
     @stars = @stars.includes(:repo, :tags)
-    next_page_url(total)
+    next_page_url(total, action: :index)
     render 'index.js'
   end
 
-  def next_page_url(total, query = {})
+  def next_page_url(total, options = {})
     pages = page_params
     if (@page = pages[:page]) * pages[:per] < total
       pages[:page] += 1
       pages[:format] = :js
-      pages.merge! query
-      @next_page_url = stars_url(pages)
+      pages.merge! options
+      @next_page_url = url_for(pages)
     end
   end
 
