@@ -42,7 +42,7 @@ class Star < ActiveRecord::Base
 
   def self.search(query, user_id, options = {})
     options[:page] ||= 1
-    options[:per_page] ||= 30
+    options[:per] ||= 30
     query_opts = {
       multi_match: {
         query: query,
@@ -63,8 +63,8 @@ class Star < ActiveRecord::Base
             }
           }
         },
-        size: options[:per_page],
-        from: (options[:page] - 1) * options[:per_page]
+        size: options[:per],
+        from: (options[:page] - 1) * options[:per]
       }
     )
   end
