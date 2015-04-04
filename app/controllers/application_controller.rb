@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :current_user, :signed_in?, :current_user?
+  helper_method :current_user, :signed_in?, :current_user?, :highlight_search
 
   private
 
@@ -33,6 +33,22 @@ class ApplicationController < ActionController::Base
   def respond_to_ujs(&blk)
     respond_to do |format|
       format.js &blk
+    end
+  end
+
+  def highlight_search(record, field)
+    if highlight_results
+      h = highlight_results[record.id]
+      return h[field].first if h && h[field]
+    end
+    record.instance_eval field
+  end
+
+  def highlight_results
+    return unless @search_results
+    @highlight_results ||= @search_results.inject({}) do |h, r|
+      h[r['_id'].to_i] = r['highlight'] || {}
+      h
     end
   end
 
