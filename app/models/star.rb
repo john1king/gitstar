@@ -11,7 +11,8 @@ class Star < ActiveRecord::Base
     mappings dynamic: 'false' do
       indexes :description, type: :string
       indexes :repo do
-        indexes :full_name, type: :string
+        indexes :owner, type: :string
+        indexes :name, type: :string
         indexes :description, type: :string
       end
       indexes :user do
@@ -28,7 +29,8 @@ class Star < ActiveRecord::Base
       only: [:description],
       include: {
         repo: {
-          only: [:id, :full_name, :description]
+          only: [:id, :description],
+          methods: [:name, :owner]
         },
         user: {
           only: [:id]
@@ -46,7 +48,7 @@ class Star < ActiveRecord::Base
     query_opts = {
       multi_match: {
         query: query,
-        fields: ['repo.full_name^10', 'repo.description']
+        fields: ['repo.name^10', 'repo.owner', 'repo.description']
       }
     }
     term_opts = {
@@ -61,6 +63,13 @@ class Star < ActiveRecord::Base
             filter: {
               term: term_opts
             }
+          }
+        },
+        highlight: {
+          fields: {
+            'repo.owner' => {},
+            'repo.name' => {},
+            'repo.description' => {},
           }
         },
         size: options[:per],

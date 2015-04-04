@@ -1,5 +1,6 @@
 class StarsController < ApplicationController
   before_action :require_signed_in_user
+  helper_method :highlight
 
   def index
     respond_to do |format|
@@ -14,9 +15,9 @@ class StarsController < ApplicationController
 
   def search
     result = Star.search(params[:q], @user.id, page_params)
-    @stars = result.records
-    @stars = @stars.includes(:repo, :tags)
-    next_page_url(result.results.total, q: params[:q])
+    @stars = result.records.includes(:user, :repo, :tags)
+    @results = result.results
+    next_page_url(@results.total, q: params[:q])
     respond_to_ujs { render 'index.js'}
   end
 
@@ -72,6 +73,22 @@ class StarsController < ApplicationController
 
   def tag_names
     params[:tags].split(',').map(&:strip).delete_if(&:empty?)
+  end
+
+  def highlight(star, field)
+    if highlight_results
+      h = highlight_results[star.id]
+      return h[field].first if h && h[field]
+    end
+    star.instance_eval field
+  end
+
+  def highlight_results
+    return unless @results
+    @highlight_results ||= @results.inject({}) do |h, r|
+      h[r['_id'].to_i] = r['highlight'] || {}
+      h
+    end
   end
 
 end
