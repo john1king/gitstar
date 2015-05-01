@@ -3,12 +3,11 @@ class ReadmeWorker
   HTML_MEDIA_TYPE = 'application/vnd.github.VERSION.html'
 
   def perform(user_id)
-    @user = User.find(user_id).repos.find_each(batch_size: 100) do |repo|
-      next if repo.readme && !repo.readme.is_loading
+    @user = User.find(user_id).no_reademe_repos.find_each(batch_size: 100) do |repo|
       logger.info "Readme `#{repo.full_name}` start"
       start_at = Time.now
       begin
-        readme = repo.create_readme is_loading: true
+        readme = repo.create_readme
       rescue ActiveRecord::RecordNotUnique
         next
       end

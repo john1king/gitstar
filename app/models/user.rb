@@ -40,4 +40,8 @@ class User < ActiveRecord::Base
     stars.where('last_updated < ?', last_updated.utc.to_formatted_s(:db)).update_all(active: false)
   end
 
+  def no_reademe_repos
+    repos.joins('LEFT OUTER JOIN readmes ON readmes.repo_id = repos.id').where(readmes: { repo_id: nil})
+  end
+
 end
