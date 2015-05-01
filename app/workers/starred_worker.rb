@@ -11,9 +11,9 @@ class StarredWorker
     each(100) do |star|
       repo = Repo.create_from_github(star[:repo])
       @user.star_repo(repo, star[:starred_at], last_updated)
-      fetch_readme repo.id
     end
     @user.unstar_deleted_repo(last_updated)
+    ReadmeWorker.perform_async(user_id)
     true
   end
 
@@ -74,10 +74,6 @@ class StarredWorker
     else
       @starred_count = client.last_response.data.size
     end
-  end
-
-  def fetch_readme(repo_id)
-    ReadmeWorker.perform_async(repo_id)
   end
 
 end

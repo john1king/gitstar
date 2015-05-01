@@ -2,15 +2,19 @@ class ReadmeWorker
   include Sidekiq::Worker
   HTML_MEDIA_TYPE = 'application/vnd.github.VERSION.html'
 
-  def perform(repo_id)
-    repo = Repo.find(repo_id)
-    return if repo.readme && !repo.readme.is_loading
-    begin
-      readme = repo.create_readme is_loading: true
-    rescue  ActiveRecord::RecordNotUnique
-      return
+  def perform(user_id)
+    @user = User.find(user_id).repos.find_each(batch_size: 100) do |repo|
+      next if repo.readme && !repo.readme.is_loading
+      logger.info "Readme `#{repo.full_name}` start"
+      start_at = Time.now
+      begin
+        readme = repo.create_readme is_loading: true
+      rescue ActiveRecord::RecordNotUnique
+        next
+      end
+      readme.update_attribute :content, read_content(repo.full_name)
+      logger.info "Readme `#{repo.full_name}` done, use #{ (Time.now - start_at).round(1) } sec"
     end
-    readme.update_attribute :content, read_content(repo.full_name)
   end
 
   private
