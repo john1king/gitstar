@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(version: 20150315145629) do
   end
 
   create_table "readmes", force: :cascade do |t|
-    t.integer "repo_id",    limit: 4,                     null: false
-    t.text    "content",    limit: 65535
-    t.boolean "is_loading", limit: 1,     default: false
+    t.integer "repo_id",    limit: 4,                        null: false
+    t.text    "content",    limit: 16777215
+    t.boolean "is_loading", limit: 1,        default: false
   end
 
   add_index "readmes", ["repo_id"], name: "index_readmes_on_repo_id", unique: true, using: :btree
