@@ -16,7 +16,11 @@ class ReadmeWorker
   private
 
   def read_content(name)
-    content = Octokit.readme name, accept: HTML_MEDIA_TYPE
+    content = client.readme name, accept: HTML_MEDIA_TYPE
+  end
+
+  def client
+    @client ||= Octokit::Client.new OAUTH_CONFIG[:github]
   end
 
 end
