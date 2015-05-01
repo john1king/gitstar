@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy', as: :logout
 
   resources :stars do
+    collection do
+      get :search
+    end
     member do
       get :edit_tag
       post :update_tag
